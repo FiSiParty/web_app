@@ -12,25 +12,13 @@ for line in Lines:
     print("Line{}: {}".format(count, line.strip()))
     a.append(line.strip())
     count+=1
-print(a)
+
 if(os.path.isfile('config.ini')==False):
-    config[a[2]] = {"Name": a[0],
-                    "IP": a[1],
-                    "Register": a[3],
-                    "readtype": a[4],
-                    "precision": a[5],
-                    "topic": a[6]}
+    config[a[0]] = {"Register": a[1]}
     with open('config.ini','w') as configfile:
         config.write(configfile)
 else:
     config.read('config.ini')
-    config[a[2]] = {"Name": a[0],
-                    "IP": a[1],
-                    "Register": a[3],
-                    "readtype": a[4],
-                    "precision": a[5],
-                    "topic": a[6]}
+    config[a[0]] = {"Register": a[1]}
     with open('config.ini','w') as configfile:
         config.write(configfile)
-
-file1.close()

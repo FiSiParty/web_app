@@ -1,7 +1,2 @@
-currency
-198.207.68.1
-003
-30001
-holding
-None
-float
+sukoontamas113@gmail.com
+Phookkie
