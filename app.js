@@ -2,6 +2,7 @@ var express = require('express');
 var session = require('express-session');
 var path = require('path');
 var bodyParser = require('body-parser');
+const { spawn } = require('child_process');
 const { json } = require('express');
 
 var app = express();
@@ -9,21 +10,21 @@ var app = express();
 
 app.use(session({
     secret: 'secret',
-    resave : true,
+    resave: true,
     saveUninitialized: true
 
 }));
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/',function(request, response){
+app.get('/', function(request, response) {
     response.sendFile(path.join(__dirname + '/main.html'));
 });
-app.post('/auth', function(request, response){
+app.post('/auth', function(request, response) {
     var fs = require("fs");
     var username = request.body.username;
     var email = request.body.email;
-    
+
     request.session.username = username;
 
     // let data = {
@@ -36,8 +37,8 @@ app.post('/auth', function(request, response){
         email + "\n" +
         username
 
-    ], function(err){
-        if(err){
+    ], function(err) {
+        if (err) {
             return console.log(err);
         }
         console.log("save");
@@ -52,22 +53,44 @@ app.post('/auth', function(request, response){
     //         email,
     //         username
     //     }
-        
+
     // }).then( () => {
     //     console.log('done')
     // })
-    
-    
 
-    
+
+
+
     response.redirect('/home');
 
 });
 
-app.get('/home', function(request, response){
-    
-    
-    response.send('Welcome back' + request.session.username + '!' )
+app.get('/home', function(request, response) {
+
+    const { PythonShell } = require("python-shell");
+    var myPythonScriptPath = 'convert.py';
+
+    // Use python shell
+    // var PythonShell = require('python-shell');
+    var pyshell = new PythonShell(myPythonScriptPath);
+
+    pyshell.on('message', function(message) {
+        // received a message sent from the Python script (a simple "print" statement)
+        console.log(message);
+    });
+
+    // end the input stream and allow the process to exit
+    pyshell.end(function(err) {
+        if (err) {
+            throw err;
+        };
+
+        console.log('finished');
+    });
+
+
+
+    response.send('Welcome back' + request.session.username + '!')
     response.end();
 });
 

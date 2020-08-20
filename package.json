@@ -1,0 +1,31 @@
+{
+  "name": "web_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "child_process": "^1.0.2",
+    "configparser": "^0.3.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "init": "^0.1.2",
+    "path": "^0.12.7",
+    "python-shell": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FiSiParty/web_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FiSiParty/web_app/issues"
+  },
+  "homepage": "https://github.com/FiSiParty/web_app#readme"
+}
