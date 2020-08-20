@@ -18,14 +18,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', function(request, response) {
-    response.sendFile(path.join(__dirname + '/main.html'));
+    response.sendFile(path.join(__dirname + '/index.html'));
 });
 app.post('/auth', function(request, response) {
     var fs = require("fs");
-    var username = request.body.username;
-    var email = request.body.email;
+    var Name = request.body.Name;
+    var IP = request.body.IP;
+    var ID = request.body.ID;
+    var Register = request.body.Register;
+    var readtype = request.body.readtype;
+    var precision = request.body.precision;
+    var topic = request.body.topic;
 
-    request.session.username = username;
+    request.session.Name = Name;
 
     // let data = {
     //     email: email,
@@ -34,8 +39,13 @@ app.post('/auth', function(request, response) {
     // let con = JSON.stringify(data);
     // fs.writeFileSync('seerii.json',con)
     fs.writeFile('test.txt', [
-        email + "\n" +
-        username
+        Name + "\n" +
+        IP + "\n" +
+        ID + "\n" +
+        Register + "\n" +
+        readtype + "\n" +
+        precision + "\n" +
+        topic
 
     ], function(err) {
         if (err) {
@@ -90,7 +100,7 @@ app.get('/home', function(request, response) {
 
 
 
-    response.send('Welcome back' + request.session.username + '!')
+    response.send('Welcome back' + request.session.Name + '!')
     response.end();
 });
 
