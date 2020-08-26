@@ -33,7 +33,7 @@ app.post('/auth', function(request, response) {
     request.session.name = name;
     request.session.topic = topic;
 
-  
+
     fs.writeFile('input.txt', [
         name + "\n" +
         ip + "\n" +
@@ -50,14 +50,14 @@ app.post('/auth', function(request, response) {
         }
         console.log("save");
     });
-    
+
     response.redirect('/convert');
 
 });
 
 app.get('/convert', function(request, response) {
-    
-    
+
+
     response.sendFile(path.join(__dirname + '/public_mqtt.html'));
     const { PythonShell } = require("python-shell");
     var python_convert_input = 'convert.py';
@@ -75,30 +75,30 @@ app.get('/convert', function(request, response) {
         console.log('finished');
     });
 
-    
 
-   
+
+
 });
 
 
 app.get('/send_mqtt', function(request, response) {
-    
+
     response.sendFile(path.join(__dirname + '/page_result.html'));
     const { PythonShell } = require("python-shell");
     var python_public_input = 'Public_input.py';
-    var python_sub_input = 'sub_input.py';
+    // var python_sub_input = 'sub_input.py';
 
 
-    
+
     var pyshell_public_in = new PythonShell(python_public_input);
-    var pyshell_sub_in = new PythonShell(python_sub_input);
+    // var pyshell_sub_in = new PythonShell(python_sub_input);
 
     pyshell_public_in.on('message', function(message) {
-       
+
         console.log(message);
     });
 
-    
+
     pyshell_public_in.end(function(err) {
         if (err) {
             throw err;
@@ -106,40 +106,40 @@ app.get('/send_mqtt', function(request, response) {
 
         console.log('finished');
     });
-    
-    pyshell_sub_in.on('message', function(message) {
-       
-        console.log(message);
-    });
 
-    
-    pyshell_sub_in.end(function(err) {
-        if (err) {
-            throw err;
-        };
+    // pyshell_sub_in.on('message', function(message) {
 
-        console.log('sub input');
-    });
-    
+    //     console.log(message);
+    // });
+
+
+    // pyshell_sub_in.end(function(err) {
+    //     if (err) {
+    //         throw err;
+    //     };
+
+    //     console.log('sub input');
+    // });
+
 
 });
 
 
 // app.get('/send_to_mqtt', function(request, response) {
 
-    
+
 //     const { PythonShell } = require("python-shell");
 //     var myPythonScriptPath = 'convert.py';
 
-    
+
 //     var pyshell = new PythonShell(myPythonScriptPath);
 
 //     pyshell.on('message', function(message) {
-       
+
 //         console.log(message);
 //     });
 
-    
+
 //     pyshell.end(function(err) {
 //         if (err) {
 //             throw err;
@@ -148,7 +148,7 @@ app.get('/send_mqtt', function(request, response) {
 //         console.log('finished');
 //     });
 
-    
+
 //     response.send('Welcome back ' + request.session.topic + '!')
 //     response.end();
 // });

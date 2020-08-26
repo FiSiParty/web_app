@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import configparser
 import os
+import sys
 
 host = "siamgreenergy.com"
 port = 1883
@@ -9,7 +10,7 @@ client.connect(host)
 
 def CheckNumSect():
     parser = configparser.ConfigParser()
-    parser.read('sub_data.ini')
+    parser.read('config.ini')
     i=1
     for sect in parser.sections():
        i+=1
@@ -17,7 +18,7 @@ def CheckNumSect():
 
 def ShowAllSect():
     parser = configparser.ConfigParser()
-    parser.read('sub_data.ini')
+    parser.read('config.ini')
     i = 1
     print("All sections in flie...")
     for sect in parser.sections():
@@ -27,7 +28,7 @@ def ShowAllSect():
 
 def EachSect(c):
     parser = configparser.ConfigParser()
-    parser.read('sub_data.ini')
+    parser.read('config.ini')
     i = 1
     for sect in parser.sections():
         if i==c:
@@ -42,7 +43,7 @@ def EachSect(c):
 
 def ReadIndex():
     parser = configparser.ConfigParser()
-    parser.read('sub_data.ini')
+    parser.read('config.ini')
     a = CheckNumSect()
     ShowAllSect()
     while True :
@@ -64,3 +65,5 @@ def ReadIndex():
     EachSect(c)
 
 ReadIndex()
+import sub_input.py
+sys.exit()

@@ -41,7 +41,7 @@ def getValue():
     i =0
     while i<couta:
         ad1 = get_setting(path, section[i], "register")
-        ad1 = ad1[2:]
+        ad1 = ad1
         print("ad1: ",ad1)
         ans = int(ad1)
         print(ans)  
